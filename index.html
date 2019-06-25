@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Train Scheduler</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
+    <!-- Momment.js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Header Image -->
+    <div class="jumbotron jumbotron-fluid text-center bg-dark">
+        <h1 class="display-4 text-primary"> Time <sapan class="text-light"> Travel </sapan> Train </h1>
+        <p class="lead text-secondary">Don't break the <span class="text-light">past</span>, or is it the
+            <span class="text-light">future?</span></p>
+    </div>
+    <div class="container">
+        <!-- Time Tabele -->
+
+        <div class="card">
+            <div class="card-header bg-dark text-light">
+                Current Train Schedule
+            </div>
+
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Train Name</th>
+                            <th>Destination</th>
+                            <th>Frequency (min)</th>
+                            <th>Next Arival</th>
+                            <th>Minutes Away</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                            <td id="data" scope="row"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card mt-2">
+            <div class="card-header bg-dark text-light">
+                Add Train
+            </div>
+
+            <form>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="train-name">Train Name</label>
+                        <input type="text" class="form-control" id="train">
+                    </div>
+                    <div class="form-group">
+
+                        <label for="train-name">Destination</label>
+                        <input type="text" class="form-control" id="destination">
+                    </div>
+                    <div class="form-group">
+                        <label for="train-name">First Train Time (HH:mm - military time)</label>
+                        <input type="text" class="form-control" id="military">
+                    </div>
+                    <div class="form-group">
+                        <label for="train-name">Frequencey (min)</label>
+                        <input type="text" class="form-control" id="min">
+                    </div>
+
+                    <button id="input" type="submit" class="btn btn-primary">Submit</button>
+                    <!-- <input id="input" type="button" value="Submit"> -->
+                </div>
+            </form>
+        </div>
+
+        <!--JavaScript -->
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="assets/javascript/main.js"></script>
+</body>
+
+</html>
