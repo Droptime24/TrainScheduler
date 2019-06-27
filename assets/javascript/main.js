@@ -35,12 +35,12 @@ $('#input').on("click", function (event) {
 
    // push object data to database
    trainInfo.ref().push(data)
-   console.log(data.train)
-   console.log(data.destination)
-   console.log(data.military)
-   console.log(data.minutes)
-   console.log(data.dateAdded)
-   alert("ALL ABOARD!")
+   // console.log(data.train)
+   // console.log(data.destination)
+   // console.log(data.military)
+   // console.log(data.minutes)
+   // console.log(data.dateAdded)
+   alert("Schedule Updated")
 
    // clear inuput data
    $('#train').val("");
@@ -51,6 +51,7 @@ $('#input').on("click", function (event) {
 
 // get data from my database and put on screen
 trainInfo.ref().on("child_added", function (Snapshot) {
+   event.preventDefault();
    console.log(Snapshot.val());
 
    // geting data
@@ -58,19 +59,26 @@ trainInfo.ref().on("child_added", function (Snapshot) {
    var endDest = Snapshot.val().destination;
    var milTime = Snapshot.val().military;
    var inMin = Snapshot.val().minutes;
+   
+   // current time
+   var now = moment();
+   var curTime = moment(now).format("hh:mm a");
 
-   console.log(trainName)
-   console.log(endDest)
-   console.log(milTime)
-   console.log(inMin)
+   // convert military time to standard time
+   var frequency = moment(milTime).format("hh:mm a");
 
-   // add time calculatins
+   
+
+   
+   console.log(curTime)
+
+
 
    // adding data to screen
    var newRow = $("<tr>").append(
       $("<td>").text(trainName),
       $("<td>").text(endDest),
-      $("<td>").text(milTime),
+      $("<td>").text(frequency),
       $("<td>").text(inMin),
    );
 
