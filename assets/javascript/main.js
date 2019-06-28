@@ -30,15 +30,14 @@ $('#input').on("click", function (event) {
       destination: destination,
       military: military,
       minutes: minutes,
-      dateAdded: firebase.database.ServerValue.TIMESTAMP
    }
 
    // push object data to database
    trainInfo.ref().push(data)
-   // console.log(data.train)
-   // console.log(data.destination)
-   // console.log(data.military)
-   // console.log(data.minutes)
+   console.log(data.train)
+   console.log(data.destination)
+   console.log(data.military)
+   console.log(data.minutes)
    // console.log(data.dateAdded)
    alert("Schedule Updated")
 
@@ -51,37 +50,49 @@ $('#input').on("click", function (event) {
 
 // get data from my database and put on screen
 trainInfo.ref().on("child_added", function (Snapshot) {
-   event.preventDefault();
    console.log(Snapshot.val());
 
    // geting data
    var trainName = Snapshot.val().train;
-   var endDest = Snapshot.val().destination;
-   var milTime = Snapshot.val().military;
+   var destination = Snapshot.val().destination;
    var inMin = Snapshot.val().minutes;
-   
-   // current time
+   var milTime = Snapshot.val().military;
+
+   // first train arives
+   var firstTrain = moment(milTime).subtract(1, "years");
+   console.log(firstTrain);
+
+   // time now
    var now = moment();
-   var curTime = moment(now).format("hh:mm a");
+   console.log(moment(now).format("hh:mm a"));
 
-   // convert military time to standard time
-   var frequency = moment(milTime).format("hh:mm a");
+   // time difference
+   var timeAdjust = moment().diff(moment(firstTrain), "minutes");
+   console.log(timeAdjust);
 
-   
+   // Time apart (remainder)
+   var timeDiff = timeAdjust % inMin;
+   console.log(timeDiff);
 
-   
-   console.log(curTime)
+   // Minute Until Train
+   var ariveAt = inMin - timeDiff;
+   console.log(ariveAt);
 
-
+   // Next Train
+   var nextArival = moment().add(ariveAt, "minutes");
+   console.log(moment(nextArival).format("hh:mm a"));
 
    // adding data to screen
-   var newRow = $("<tr>").append(
+   var newRow = $(`<tr class="text-primary">`).append(
       $("<td>").text(trainName),
-      $("<td>").text(endDest),
-      $("<td>").text(frequency),
-      $("<td>").text(inMin),
+      $("<td>").text(destination),
+      $("<td>").text(`Every ${inMin} Minutes`),
+      $("<td>").text(moment(nextArival).format("hh:mm a")),
+      $("<td>").text(ariveAt),
    );
 
-   $("#train-table > tBody").append(newRow);
-
+   $("tBody").append(newRow);
+   
+}, function (errorObject) {
+   console.log("Errors handled: " + errorObject.code);
 });

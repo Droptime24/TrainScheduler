@@ -22,13 +22,14 @@
 
 </head>
 
-<body class="background-image">
+<body class="bg-secondary">
 
     <!-- Header Image -->
     <div class="jumbotron jumbotron-fluid text-center bg-dark">
         <h1 class="display-4 text-primary"> Time <sapan class="text-light"> Travel </sapan> Train </h1>
         <p class="lead text-secondary">Don't break the <span class="text-light">past</span>, or is it the
             <span class="text-light">future?</span></p>
+            <h1 id="current-time" class="text-light"></h1>
     </div>
     <div class="container">
         <!-- Time Tabele -->
@@ -44,7 +45,7 @@
                         <tr>
                             <th>Train Name</th>
                             <th>Destination</th>
-                            <th>Train Frequency</th>
+                            <th>Time Flux</th>
                             <th>Next Arival</th>
                             <th>Minutes Away</th>
                         </tr>
@@ -73,11 +74,11 @@
                         <input type="text" class="form-control" id="destination">
                     </div>
                     <div class="form-group">
-                        <label for="train-name">First Train Arives </label> <!-- (HH:mm - military time) -->
+                        <label for="train-name">First Train Arives (HH:mm) </label> <!-- (HH:mm - military time) -->
                         <input type="text" class="form-control" id="military">
                     </div>
                     <div class="form-group">
-                        <label for="train-name">Next Train Arives</label>
+                        <label for="train-name">Arives Every</label>
                         <input type="text" class="form-control" id="min">
                     </div>
 
