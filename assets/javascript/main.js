@@ -14,6 +14,7 @@ firebase.initializeApp(firebaseConfig);
 
 var trainInfo = firebase.database();
 
+
 $('#input').on("click", function (event) {
 
    event.preventDefault();
@@ -34,11 +35,8 @@ $('#input').on("click", function (event) {
 
    // push object data to database
    trainInfo.ref().push(data)
-   console.log(data.train)
-   console.log(data.destination)
-   console.log(data.military)
-   console.log(data.minutes)
-   // console.log(data.dateAdded)
+
+   // alert of update
    alert("Schedule Updated")
 
    // clear inuput data
@@ -52,7 +50,7 @@ $('#input').on("click", function (event) {
 trainInfo.ref().on("child_added", function (Snapshot) {
    console.log(Snapshot.val());
 
-   // geting data
+   // geting data from firebase
    var trainName = Snapshot.val().train;
    var destination = Snapshot.val().destination;
    var inMin = Snapshot.val().minutes;
@@ -60,7 +58,6 @@ trainInfo.ref().on("child_added", function (Snapshot) {
 
    // first train arives
    var firstTrain = moment(milTime).subtract(1, "years");
-   console.log(firstTrain);
 
    // time now
    var now = moment();
@@ -68,19 +65,15 @@ trainInfo.ref().on("child_added", function (Snapshot) {
 
    // time difference
    var timeAdjust = moment().diff(moment(firstTrain), "minutes");
-   console.log(timeAdjust);
 
-   // Time apart (remainder)
+   // differance in times
    var timeDiff = timeAdjust % inMin;
-   console.log(timeDiff);
 
-   // Minute Until Train
+   // Minutes Until Train
    var ariveAt = inMin - timeDiff;
-   console.log(ariveAt);
 
    // Next Train
    var nextArival = moment().add(ariveAt, "minutes");
-   console.log(moment(nextArival).format("hh:mm a"));
 
    // adding data to screen
    var newRow = $(`<tr class="text-primary">`).append(
@@ -91,8 +84,9 @@ trainInfo.ref().on("child_added", function (Snapshot) {
       $("<td>").text(ariveAt),
    );
 
+   // append data to tbody
    $("tBody").append(newRow);
-   
+
 }, function (errorObject) {
    console.log("Errors handled: " + errorObject.code);
 });
