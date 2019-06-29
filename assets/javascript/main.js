@@ -57,7 +57,7 @@ trainInfo.ref().on("child_added", function (Snapshot) {
    var milTime = Snapshot.val().military;
 
    // first train arives
-   var firstTrain = moment(milTime).subtract(1, "years");
+   var firstTrain = moment(milTime, "HH:mm").subtract(1, "years");
 
    // time now
    var now = moment();
@@ -76,7 +76,7 @@ trainInfo.ref().on("child_added", function (Snapshot) {
    var nextArival = moment().add(ariveAt, "minutes");
 
    // adding data to screen
-   var newRow = $(`<tr class="text-primary">`).append(
+   var newRow = $(`<tr class="text-info">`).append(
       $("<td>").text(trainName),
       $("<td>").text(destination),
       $("<td>").text(`Every ${inMin} Minutes`),
